@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ajouter projet</title>
+  <link rel="stylesheet" href="./css/styleajpr.css">
+  <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
+</head>
+<body>
+  <div class="sidebar">
+    <div class="sidebar-brand">
+     <h2><span class="lab la-dyalog"></span>DSI</h2>
+    </div>
+    <div class="sidebar-menu">
+     <ul>
+       <li>
+         <a href="./superieur.html"><span class="las la-igloo"></span>Dashboard</a>
+       </li>
+       <li>
+         <a href="./ajouterProjet.html"class="active"><span class="las la-plus-square"></span>Ajouter projet</a>
+       </li>
+       <li>
+         <a href="./profilepage.html"><span class="las la-user"></span>Profil</a>
+         <div class="sidebar-menu-profil">
+          <ul>
+             <li>
+               <a href="./modifierProfile.html"><span class="las la-edit"></span>Modifier Profil</a>
+             </li>
+             <li>
+               <a href="./modifiermdp.html"><span class="las la-key"></span>Modifier mot de passe</a>
+              </li>
+          </ul>
+         </div>
+       </li>
+       <li>
+         <a href=""><span class="las la-sign-out-alt"></span>Déconnexion</a>
+       </li>
+     </ul>
+    </div>
+  </div>
+  <div class="main-content">
+   <header>
+      <h3>
+       <label for="">
+         <span class="las la-bars"></span>
+       </label>
+       Ajouter Projet
+      </h3>
+    <div class="user-wrapper">
+      <img src="https://www.beu.edu.tr/Dosyalar/ProfilResmi/rDwxUWp8Kyblank-profile-picture-973460_960_720.webp" width="40px" height="40px" alt="">
+      <div>
+        <h4>nom utilisteur*</h4>
+        <small>type*</small>
+      </div>
+    </div>
+  </header>
+  <main>
+    <div class="formulaire">
+      <form>
+        <div class="input">
+            <input type="text" id="titre" required>
+            <label id="label" for="titre">Titre tache</label>
+        </div>
+        <div class="select" >
+          <select id="select">
+            <option value="0">Type de Tache:</option>
+            <option value="1">tache1</option>
+            <option value="2">tache2</option>
+            <option value="3">tache3</option>
+            <option value="4">tache4</option>
+          </select>
+        </div>
+        <div class="input">
+        <input type="file" id="myfile" name="myfile">
+        </div>
+        <div class="input">
+          <textarea id="message" rows="10" required></textarea>
+          <label id="label" for="titre">message</label>
+      </div>
+      <button type="submit">Crée Tache</button>
+     </form>
+    </div> 
+  </main>
+</body>
+
+</html>

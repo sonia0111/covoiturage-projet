@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="./css/ajouter-utilisateur.css">
+</head>
+
+<body>
+    <!-- <%- include("./partials/sidebar") %>
+
+        <%- include("./partials/header") %> -->
+
+            <div class="main-content">
+                <main>
+                    <div class="formulaire">
+                        <form>
+                            <div class="input">
+                                <input type="email" id="email" name="email" required>
+                                <label id="label" for="email">Email</label>
+                            </div>
+                            <div class="input">
+                                <input type="username" id="username" name="username" required>
+                                <label id="label" for="username">Nom d'Utilisateur</label>
+                            </div>
+                            <div class="input">
+                                <input type="password" id="password" name="password" required>
+                                <label id="label" for="password">Mot de Passe</label>
+                            </div>
+                            <div class="input">
+                                <input type="phone" id="phone" name="phone" required>
+                                <label id="label" for="email">phone</label>
+                            </div>
+                            <div class="input_d">
+                                <label id="label" for="birthdate">Date de Naissance</label>
+                                <input type="date" id="birthdate" name="birthdate" required>
+                                
+                            </div>
+                            <div class="select">
+                                <select id="select" class="sexe">
+                                    <option disabled selected value="">Choisir Sexe:</option>
+                                    <option value="homme">Homme</option>
+                                    <option value="femme">Femme</option>
+                                </select>
+                            </div>
+                            <div class="select">
+                                <select id="select" class="type" onchange="handleAccountTypeChange()">
+                                    <option disabled selected value="">Type de Compte:</option>
+                                    <option value="help-desk">Help Desk</option>
+                                    <option value="operator">Operateur</option>
+                                    <option value="Superieur">Superieur</option>
+                                    <option value="Basic">Informaticien</option>
+                                </select>
+                            </div>
+                            <div class="select" id='supportTeam' style="display:none">
+                                <select id="select" class="supportTeam">
+                                    <option disabled selected value="">Domaine de Support:</option>
+                                    <option value="reseau">Reseau & Securité</option>
+                                    <option value="software">Systemes & logiciels</option>
+                                    <option value="hardware">Materiels & Equipements</option>
+                                    <option value="datacenter">Data center</option>
+                                    <option value="messagerie">Messagerie</option>
+                                </select>
+                            </div>
+                            <div class="select" id='teamField' style="display:none">
+                                <select id="select" class="teamField">
+                                    <option disabled selected value="">Domaine d'informaticien:</option>
+                                    <option value="dataBase">Administrateur de bases de données</option>
+                                    <option value="softwareDev">Développeur logiciel</option>
+                                    <option value="architect">Architecte informatique</option>
+                                    <option value="security">Responsable de la sécurité informatique</option>
+                                    <option value="network">Responsable des réseaux informatique</option>
+                                </select>
+                            </div>
+
+                            <div id="error" class="error"></div>
+                            <button type="submit">Créer Utilisateur</button>
+                        </form>
+                    </div>
+                </main>
+            </div>
+            <script>
+                function handleAccountTypeChange() {
+                    var accountType = document.querySelector('.type').value;
+                    var teamType = document.getElementById('teamType');
+                    var teamTypeSelect = document.querySelector('.teamType');
+                    var supportTeam = document.getElementById("supportTeam");
+                    var teamField = document.getElementById("teamField");
+
+                    if (accountType === "Basic") {
+                        teamField.style.display = "block";
+                        supportTeam.style.display = "none";
+                    } else if (accountType === "help-desk") {
+                        supportTeam.style.display = "block";
+                        teamField.style.display = "none";
+                    } else {
+                        teamField.style.display = "none";
+                        supportTeam.style.display = "none";
+                    }
+                }
+                
+            </script>
+            <script>
+                const form = document.querySelector('form');
+                if (form) {
+                    const email = document.querySelector('#email');
+                    const username = document.querySelector('#username');
+                    const password = document.querySelector('#password');
+                    const phone = document.querySelector('#phone')
+                    const birthdate = document.querySelector('#birthdate')
+                    const sexe = document.querySelector('.sexe')
+                    const type = document.querySelector('.type')
+                    const supportTeam = document.querySelector('.supportTeam')
+                    const teamField = document.querySelector('.teamField')
+                    const errorMsg = document.querySelector('#error');
+
+                    form.addEventListener('submit', async (e) => {
+                        e.preventDefault();
+
+                        try {
+                            const res = await fetch('/ajouter-utilisateur', {
+                                method: 'POST',
+                                body: JSON.stringify({
+                                    email: email.value,
+                                    username: username.value,
+                                    password: password.value,
+                                    phone: phone.value,
+                                    birthDate: birthdate.value,
+                                    sexe: sexe.value,
+                                    type: type.value,
+                                    supportTeam: supportTeam.value,
+                                    teamField: teamField.value,
+                                }),
+                                headers: { 'Content-Type': 'application/json' },
+                            });
+
+                            const data = await res.json();
+
+                            if (res.status === 400 || res.status === 500) {
+                                errorMsg.textContent = data.message;
+                                form.reset();
+                                return;
+                            }
+
+                            // Check if the response contains the user ID
+                            if (data.newUser && data.newUser._id) {
+                                // Redirect to the complete profile page with the user ID in the URL
+                                window.location.href = "/home";
+                            } else {
+                                console.log('User ID not found in server response');
+                                errorMsg.textContent = 'An error occurred while submitting the form';
+                            }
+                        } catch (err) {
+                            console.log(err);
+                            errorMsg.textContent = 'An error occurred while submitting the form';
+                            form.reset();
+                        }
+                    });
+                }
+            </script>
+</body>
+
+</html>

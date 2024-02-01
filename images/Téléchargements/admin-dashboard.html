@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- <%- include("./partials/head") %> -->
+    <link rel="stylesheet" href="./css/stylesuperieur.css">
+</head>
+
+<body>
+
+  <!-- <%- include("./partials/sidebar") %> 
+
+    <%- include("./partials/header") %> -->
+      <main>
+        <div class="cards">
+          <div class="card-s">
+            <div>
+              <h1 id="accountCount"></h1>
+              <span>Comptes</span>
+            </div>
+            <div>
+              <span class="las la-clipboard"></span>
+            </div>
+          </div>
+
+          <div class="card-s">
+            <div>
+              <h1 id="activatedCount"></h1>
+              <span>Comptes Activés</span>
+            </div>
+            <div>
+              <span class="las la-tasks"></span>
+            </div>
+          </div>
+          <div class="card-s">
+            <div>
+              <h1 id="deactivatedCount"></h1>
+              <span>Comptes Désactivés</span>
+            </div>
+            <div>
+              <span class="las la-stream"></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="recent-grid">
+          <div class="projects">
+            <div class="card">
+              <div class="card-header">
+                <form id="searchForm">
+                  <input type="text" id="searchInput" placeholder="Recherche...">
+
+                </form>
+                <form>
+                  <label for="filterOption">Status:</label>
+                  <select id="filterOption">
+                    <option value="Active">Active</option>
+                    <option value="Inactive">Inactive</option>
+                  </select>
+                  <label for="filterOption2">Role:</label>
+                  <select id="filterOption2">
+                    <option value="any">All Users</option>
+                    <option value="Admin">Admin</option>
+                    <option value="Superieur">Superieur</option>
+                    <option value="help-desk">Help Desk</option>
+                    <option value="operator">Operateur</option>
+                    <option value="Basic">Informaticien</option>
+                  </select>
+                  <select id="entriesPerPage">
+                    <option value="20">20 entries</option>
+                    <option value="50">50 entries</option>
+                    <option value="100">100 entries</option>
+                  </select>
+
+
+                </form>
+              </div>
+
+              <div class="card-body">
+                <table width="100%">
+                  <thead>
+                    <tr>
+                      <td>Username</td>
+                      <td>date d'ajout</td>
+                      <td>role</td>
+                      <td>Equipe</td>
+                      <td>Actions</td>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Username</td>
+                      <td>date d'ajout</td>
+                      <td>role</td>
+                      <td>Equipe</td>
+                      <td>Actions</td>
+                    </tr>
+                    <tr>
+                      <td>Username</td>
+                      <td>date d'ajout</td>
+                      <td>role</td>
+                      <td>Equipe</td>
+                      <td>Actions</td>
+                    </tr>
+                    <tr>
+                      <td>Username</td>
+                      <td>date d'ajout</td>
+                      <td>role</td>
+                      <td>Equipe</td>
+                      <td>Actions</td>
+                    </tr>
+                    <tr>
+                      <td>Username</td>
+                      <td>date d'ajout</td>
+                      <td>role</td>
+                      <td>Equipe</td>
+                      <td>Actions</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+            </div>
+          </div>
+        <div class="next">
+        <button id="nextButton">Next</button>
+        </div>
+      </div>
+      </main>
+
+
+      <script>
+        let currentPage = 1;
+        let entriesPerPage = 20;
+        let filteredUsers = [];
+
+
+        function renderUsers(Users) {
+          // Calculate the starting and ending indices for the current page
+          const startIndex = (currentPage - 1) * entriesPerPage;
+          const endIndex = startIndex + entriesPerPage;
+
+          // Get the sliced users for the current page
+          const slicedUsers = Users.slice(startIndex, endIndex);
+
+          // Get the table body element
+          const tbody = document.querySelector('tbody');
+          tbody.innerHTML = '';
+
+          // Loop through each user and create a table row
+          slicedUsers.forEach(user => {
+            const tr = document.createElement('tr');
+            tr.id = `userRow_${user._id}`;
+            // Add the user data to the table row
+            tr.innerHTML = `
+            <td>${user.username}</td>
+            <td>${user.createdAt ? new Date(user.createdAt).toLocaleDateString() : '-'}</td>
+            <td>${user.role}</td>
+            <td>${user.role === 'Basic' ? user.devTeam.name : user.role === 'help-desk' ? user.supportTeam.name : '-'}</td>
+            <td>${user.status === 'Active' ? '<button id="deactivate">Deactivate</button>' : '<button id="activate">Activate</button>'}</td>
+ `;
+            // Append the table row to the table body
+            tbody.appendChild(tr);
+          });
+
+          // Update the next button visibility based on the current page and entries per page
+          const nextButton = document.getElementById('nextButton');
+          nextButton.style.display = endIndex < Users.length ? 'block' : 'none';
+        }
+
+
+        // Function to fetch filtered users based on selected filters and store the result in filteredUsers array
+        async function fetchFilteredUsers() {
+          // Get the selected filter values
+          const filterOption = document.getElementById('filterOption').value;
+          const filterOption2 = document.getElementById('filterOption2').value;
+          const searchQuery = document.getElementById('searchInput').value.trim().toLowerCase();
+          console.log(searchQuery);
+
+          try {
+            // Fetch the user data from the server
+            const res = await fetch('/utilisateurs', {
+              method: 'GET',
+              headers: { 'Content-Type': 'application/json' },
+            });
+
+            // Parse the response data as JSON
+            const data = await res.json();
+
+            if (data) {
+              // Filter the users based on the selected filter options
+              filteredUsers = data.users.filter(user => {
+                if (
+                  (filterOption && user.status !== filterOption) ||
+                  (filterOption2 && filterOption2 !== 'any' && user.role !== filterOption2)
+                ) {
+                  return false;
+                }
+                if (searchQuery && !user.username.toLowerCase().includes(searchQuery)) {
+                  return false;
+                }
+                return true;
+              });
+              console.log(filteredUsers);
+
+              // Reset the current page to 1
+              currentPage = 1;
+              // Render the filtered users in the HTML table
+              renderUsers(filteredUsers);
+            }
+          } catch (error) {
+            console.log('An error occurred:', error);
+          }
+        }
+
+        // Event listener for the filter options
+        document.getElementById('filterOption').addEventListener('change', fetchFilteredUsers);
+        document.getElementById('filterOption2').addEventListener('change', fetchFilteredUsers);
+
+        // Event listener for the entries per page select element
+        document.getElementById('entriesPerPage').addEventListener('change', event => {
+          // Update the entriesPerPage value
+          entriesPerPage = parseInt(event.target.value);
+          // Reset the current page to 1
+          currentPage = 1;
+          // Render the users with the updated settings
+          renderUsers(filteredUsers);
+        });
+
+        // Event listener for the next button
+        document.getElementById('nextButton').addEventListener('click', () => {
+          // Increment the current page
+          currentPage++;
+          // Render the users for the next page
+          renderUsers(filteredUsers);
+        });
+        document.getElementById('searchInput').addEventListener('input', fetchFilteredUsers);
+
+
+        // Event listener for the parent element of the activate and deactivate buttons
+        document.querySelector('tbody').addEventListener('click', async (event) => {
+          const row = event.target.closest('tr');
+          if (event.target.id === 'activate') {
+            const userId = row.id.split('_')[1];
+            // Activate button clicked, perform the activation logic
+            try {
+              const res = await fetch('/api/activateAccount', {
+                method: 'POST',
+                body: JSON.stringify({ userId: userId }),
+                headers: {
+                  'Content-Type': 'application/json'
+                }
+              });
+
+              const data = await res.json();
+
+              if (res.status === 200) {
+                // Update the user interface or perform any necessary actions
+                alert('Account activated successfully');
+                location.reload();
+              } else {
+                // Handle error response
+                alert('Error activating account: ' + data.error);
+              }
+            } catch (err) {
+              // Handle fetch error
+              alert('Error activating account: ' + err.message);
+            }
+          } else if (event.target.id === 'deactivate') {
+            const userId = row.id.split('_')[1];
+            // Deactivate button clicked, perform the deactivation logic
+            try {
+              const res = await fetch('/api/deactivateAccount', {
+                method: 'POST',
+                body: JSON.stringify({ userId: userId }),
+                headers: {
+                  'Content-Type': 'application/json'
+                }
+              });
+
+              const data = await res.json();
+
+              if (res.status === 200) {
+                // Update the user interface or perform any necessary actions
+                alert('Account deactivated successfully');
+                location.reload();
+              } else {
+                // Handle error response
+                alert('Error deactivating account: ' + data.error);
+              }
+            } catch (err) {
+              // Handle fetch error
+              alert('Error deactivating account: ' + err.message);
+            }
+          }
+        });
+
+
+
+        // Initial fetch to get the filtered users for the default settings
+        fetchFilteredUsers();
+
+
+        async function fetchAccountCounts() {
+          try {
+            const res = await fetch('/api/accountCount');
+            const data = await res.json();
+            return data;
+          } catch (err) {
+            console.error('Error fetching account counts:', err);
+            return {
+              activatedCount: 0,
+              deactivatedCount: 0,
+              totalCount: 0
+            };
+          }
+        }
+
+        async function updateAccountCounts() {
+          const activatedCountElement = document.getElementById('activatedCount');
+          const deactivatedCountElement = document.getElementById('deactivatedCount');
+          const totalCountElement = document.getElementById('accountCount');
+
+          const { activatedCount, deactivatedCount } = await fetchAccountCounts();
+
+          activatedCountElement.textContent = activatedCount;
+          deactivatedCountElement.textContent = deactivatedCount;
+          totalCountElement.textContent = activatedCount + deactivatedCount;
+        }
+
+        updateAccountCounts();
+
+
+
+
+
+
+      </script>
+</body>
+
+</html>
