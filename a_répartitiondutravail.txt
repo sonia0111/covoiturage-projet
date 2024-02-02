@@ -1,0 +1,59 @@
+voici la répartion du travail de ce projet :
+## Tâches Réalisées en tant que Teamleader sonia bellil
+
+En tant que leader de l'équipe, j'ai été responsable des tâches suivantes :
+
+### 1. Envoi de Réclamations à l'Administrateur
+
+- Mise en place de la fonctionnalité permettant aux utilisateurs d'envoyer des réclamations à l'administrateur.
+
+### 2. Modification des Informations du Profil des Utilisateurs
+
+- Ajout de la possibilité de modifier les informations du profil des utilisateurs, y compris la photo de profil.
+
+### 3. Authentification
+
+- Implémentation des fonctionnalités de connexion (login) et de déconnexion (logout).
+
+### 4. Mot de Passe Oublié
+
+- Mise en place du processus de récupération du mot de passe en cas d'oubli par l'utilisateur.
+
+### 5. Backend - Page d'Accueil
+
+- Développement de la page d'accueil côté serveur (backend).
+- Affichage des trajets avec option de géolocalisation et de proximité spécifiée.
+
+### 6. Réservation de Trajets
+
+- Mise en place de la possibilité de réserver un trajet, en prenant en compte les contraintes de connexion et la disponibilité des places.
+- Assuré qu'une seule réservation est autorisée pour le même trajet à la même personne.
+
+## Tâches Réalisées par Mustapha Boumaza (Administration Complète)
+
+Mustapha Boumaza a été chargé de la gestion complète de l'administration, avec les tâches suivantes :
+
+- Gestion des trajets : Supprimer ou modifier un trajet.
+- Gestion des utilisateurs : Supprimer ou modifier un utilisateur.
+- Gestion des voitures : Ajouter, supprimer ou modifier des informations sur les voitures.
+- Gestion des utilisateurs bloqués : Prendre des mesures appropriées envers les utilisateurs bloqués.
+- Gestion des réclamations : Examiner et  traiter les réclamations des utilisateurs.
+- Gestion des réservations : Superviser les réservations et assurer leur bon déroulement.
+- Gestion des paramètres de réservation : Définir des paramètres tels que la proximité, la limite de géolocalisation et la date limite de réservation.
+
+## Tâches Réalisées par Yacine Amellal
+
+Yacine Amellal a contribué de manière significative avec les tâches suivantes :
+
+- Ajout de Trajets par les Utilisateurs : Permet aux utilisateurs de proposer de nouveaux trajets.
+- Ajout de la Position de Départ à l'aide de l'API de Géolocalisation : Intégration de la géolocalisation pour spécifier la position de départ du trajet.
+- Suppression d'un Trajet : Possibilité pour les utilisateurs de supprimer des trajets existants.
+- Gestion des Réservations : Incluant l'annulation d'une réservation.
+
+## Tâches Réalisées par Firas Lachacheb (Design et Responsive)
+
+Firas Lachacheb a pris en charge la réalisation du design avec les tâches suivantes :
+
+- Conception de la page d'accueil avec sidebar et navbar.
+- Rendu de l'ensemble du site responsive pour une expérience utilisateur optimale sur différents dispositifs.
+- Réglages généraux du design pour garantir une interface utilisateur cohérente et esthétique.

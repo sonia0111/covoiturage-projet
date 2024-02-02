@@ -7,8 +7,11 @@ if (isset($_GET['derniers'])) {
 
 	$lat = $_POST['latitude'];
 	$lon = $_POST['longitude'];
-	$distanceLimit = 1.5; // Limite de distance en kilomètres
-
+	$query3 = "SELECT valeur_config FROM configuration WHERE id_config =3 ";
+	$result = $bd->query($query3);
+	$row = $result->fetch(PDO::FETCH_ASSOC);
+	$distanceLimit =  $row['valeur_config']; // Limite de distance en kilomètres
+	      
     // Calcul des latitudes et longitudes minimales et maximales
     $latMin = $lat - ($distanceLimit / 111.32);
     $latMax = $lat + ($distanceLimit / 111.32);
@@ -209,7 +212,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['reserve'])) {
 								$row2 = $query_run->fetch(PDO::FETCH_ASSOC);
 
 								?>
-								<span class="name"><?= $row2['nom_user'] . ' ' . $row2['prenom_user'] ?></span>
+								<span class="name" style="font-size: 20px;"><?= $row2['nom_user'] . ' ' . $row2['prenom_user'] ?></span>
 								<div class="available">
 									<?= $row->nbplacedispo ?> places restantes
 								</div>

@@ -10,7 +10,6 @@ $arr[$i] = array();
 
 foreach ($affiche_configuration as $resultat) {
 
-    // $id =  $resultat['id_config'];
     $val_configue = $resultat['valeur_config'];
     $arr[$i] = $val_configue;
     $i++;
@@ -18,6 +17,7 @@ foreach ($affiche_configuration as $resultat) {
 
 $nb_max_places = $arr[1];
 $duree_reservation = $arr[2];
+$proximité = $arr[3];
 
 ?>
 
@@ -46,9 +46,7 @@ $duree_reservation = $arr[2];
                                             <label class="col-lg-10 col-form-label">Nombre max de place
                                                 <span class="text-danger">*</span>
                                             </label>
-                                            <div class="col-lg-10">
-
-                                                <!-- <input type="hidden" class="form-control" name="val-ID" value=> -->
+                                            <div class="col-lg-11">
 
                                                 <input type="text" class="form-control" name="val-nb_max_places" value=<?php echo "$nb_max_places" ?> placeholder="Enter le nombre maximal de places.." required>
 
@@ -59,9 +57,19 @@ $duree_reservation = $arr[2];
                                             <label class="col-lg-10 col-form-label">Durèe de reservation avant le depart du trajet / heure(s)
                                                 <span class="text-danger">*</span>
                                             </label>
-                                            <div class="col-lg-10">
-                                                
+                                            <div class="col-lg-11">
+
                                                 <input type="text" class="form-control" name="val-duree_reservation" value=<?php echo $duree_reservation ?> placeholder="Enter la durèe de reservation avant le depart du trajet.." required>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <label class="col-lg-12 col-form-label">la proximité maximale pour une recherche ciblée de trajets à proximité / kilomètres
+                                                <span class="text-danger">*</span>
+                                            </label>
+                                            <div class="col-lg-11">
+
+                                                <input type="text" class="form-control" name="val-proximite" value=<?php echo $proximité ?> placeholder="Enter la durèe de reservation avant le depart du trajet.." required>
                                             </div>
                                         </div>
 

@@ -28,7 +28,7 @@
 			</li>
 			<li>
 				<div class="icon-link">
-					<a href="#">
+					<a href="../user_trajet\user_trajet/liste_trajets.php">
 						<i class="bx bx-car"></i>
 						<span class="link_name"> Mes trajectoire</span>
 					</a>
@@ -41,7 +41,7 @@
 			
 			<li>
 				<div class="icon-link">
-					<a href="#">
+					<a href="../user_trajet\user_trajet/liste_reservation.php">
 						<i class="bx bx-calendar-check"></i>
 						<span class="link_name">Mes Réservation</span>
 					</a>
