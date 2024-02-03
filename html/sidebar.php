@@ -29,28 +29,17 @@
 			<li>
 				<div class="icon-link">
 					<a href="../user_trajet\user_trajet/liste_trajets.php">
-						<i class="bx bx-car"></i>
-						<span class="link_name"> Mes trajectoire</span>
+					<i class='bx bx-menu' ></i>
+						<span class="link_name"> Menu</span>
 					</a>
 					<ul class="sub-menu blank">
-						<li><a class="link_name" href="../user_trajet\user_trajet/liste_trajets.php">Mes trajectoire</a></li>
+						<li><a class="link_name" href="../user_trajet\user_trajet/liste_trajets.php">Menu</a></li>
 					</ul>
 				</div>
 
 			</li>
 			
-			<li>
-				<div class="icon-link">
-					<a href="../user_trajet\user_trajet/liste_reservation.php">
-						<i class="bx bx-calendar-check"></i>
-						<span class="link_name">Mes Réservation</span>
-					</a>
-					<ul class="sub-menu blank">
-						<li><a class="link_name" href="../user_trajet\user_trajet/liste_reservation.php">Mes Réservation</a></li>
-					</ul>
-				</div>
-
-			</li>
+			
 			<li>
 				<div class="icon-link">
 					<a href="./reclamation.php">

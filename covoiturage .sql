@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : ven. 02 fév. 2024 à 23:15
+-- Généré le : sam. 03 fév. 2024 à 21:31
 -- Version du serveur : 10.4.32-MariaDB
 -- Version de PHP : 8.0.30
 
@@ -118,11 +118,14 @@ CREATE TABLE `trajet` (
 --
 
 INSERT INTO `trajet` (`id_trajet`, `lieu_dep`, `lieu_dest`, `nbplacedispo`, `conducteur`, `latitude_depart`, `longeture_depart`, `date_depart`, `heure_depart`, `prix`) VALUES
-(29, 'alger', 'blida', 5, 8, '36.7292384', '3.1306361', '2024-01-31', '22:00:00', 0),
+(29, 'bateau cassé', 'alger centre', 5, 8, '36.7292384', '3.1306361', '2024-01-31', '22:00:00', 0),
 (30, 'tipaza', 'boumerdas', 4, 7, '333', '222', '2024-01-03', '21:00:00', 0),
 (31, 'tipaza', 'boumerdas', 4, 7, '333', '222', '2024-01-03', '21:00:00', 200),
-(32, 'blida', 'oran', 7, 7, '36.769172', '3.226752', '2024-02-04', '21:00:00', 200),
-(33, 'alger', 'oran', 5, 7, '12.3658', '6.2568', '2024-02-24', '01:30:00', 200);
+(32, 'borj el kiffan', 'tamaris', 7, 7, '36.769172', '3.226752', '2024-02-04', '21:00:00', 200),
+(33, 'alger', 'oran', 5, 7, '12.3658', '6.2568', '2024-02-24', '01:30:00', 200),
+(34, 'Cité EPLF,1080 Logts', 'blida', 3, 10, '36.7205320997627', '3.1855181176431624', '2024-02-27', '09:20:03', 0),
+(35, 'Cité EPLF,1080 Logts', 'blida', 3, 10, '36.720532099762', '3.1855181176431624', '2024-02-29', '09:25:00', 500),
+(36, 'Cité Rabia Tahar', 'harach', 6, 9, '36.72334143230016', ' 3.181226311340638', '2024-03-20', '11:30:00', 300);
 
 -- --------------------------------------------------------
 
@@ -147,7 +150,9 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` (`id_user`, `pdp`, `nom_user`, `prenom_user`, `num_tel`, `email_user`, `type_user`, `mdp_user`) VALUES
 (7, '', 'boumaza', 'mustapha ', '05555555', 'mustapha@gmail.com', 'Administrateur', '123'),
-(8, '', 'amellal', 'yacinee', '066666666', 'amellalyacine@email.com', 'Utilisateur', '123');
+(8, '', 'amellal', 'yacinee', '066666666', 'amellalyacine@email.com', 'Utilisateur', '123'),
+(9, '', 'bellil', 'sonia', '0550555055', 'belsonia167@gmail.com', 'user', '321'),
+(10, '', 'aissani', 'mohamed', '0550550555', 'aissanim@gmail.com', 'user', '159');
 
 -- --------------------------------------------------------
 
@@ -280,13 +285,13 @@ ALTER TABLE `reservation`
 -- AUTO_INCREMENT pour la table `trajet`
 --
 ALTER TABLE `trajet`
-  MODIFY `id_trajet` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `id_trajet` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- AUTO_INCREMENT pour la table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id_user` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id_user` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT pour la table `user_bloquer`
